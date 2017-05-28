@@ -1,6 +1,6 @@
 # Password Strength Calculator
 
-[TODO. There will be project description]
+[The scrip evaluates password strength and denies password with an unappropriate string or substring]
 
 # Project Goals
 
