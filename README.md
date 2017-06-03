@@ -1,10 +1,10 @@
-# Password Strength Calculator **bold**
+# **Password Strength Calculator**
 
 The scrip evaluates password strength and denies password with an unappropriate string or substring
 You just need to encript your password (you will see the proposal to input after launching) and program
 will count its rating or offer to input another one
 
-Here are the rules you should respect **bold**: 
+**Here are the rules you should respect:** 
 
 * the use of both upper-case and lower-case letters (case sensitivity)
 * inclusion of one or more numerical digits
@@ -16,6 +16,6 @@ Here are the rules you should respect **bold**:
 
 
 
-# Project Goals **bold**
+# **Project Goals**
 
 The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
