@@ -4,7 +4,7 @@ The scrip evaluates password strength and denies password with an unappropriate 
 You just need to encript your password (you will see the proposal to input after launching) and program
 will count its rating or offer to input another one
 
-Hera are the rules you should respect: **bold**
+Here are the rules you should respect **bold**: 
 
 * the use of both upper-case and lower-case letters (case sensitivity)
 * inclusion of one or more numerical digits
