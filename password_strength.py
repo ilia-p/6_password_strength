@@ -1,38 +1,26 @@
-import re
+import re, getpass
 
-# For password rating evaluatuon
-# 1. Upper- and lower-case:
-lower_case = re.compile(r'[a-z]')
-upper_case = re.compile(r'[A-Z]')
-# 2. Digits
-digits     = re.compile(r'\d')
-# 3. Special symbols
-spec_symb  = re.compile(r'@|\^|#|\$|\*|&|-|_')
-# For password denying
-# 4. Bad passwordlist (depends on used (may be old) passwords, etc.)
-bad_password_list = ['vasya123', 'irina 1974', 'uryuk']
-# 5. Persosnel information words 
-pers_inf     = re.compile(r'ILIA|PETROV|IRINA|NIKITENKO')
-# 6. Company name (both full and acronim)
-company_name = re.compile(r'HumanFactorLabs|HFLabs|HFL')
-# 7. Standard formats
-standard_formats  = re.compile(r'\d{2}[\.-]\d{2}[\.-]\d{2,4}|\d{4}-\d{2}-\d{2}|[a-zA-Z]{1}\d{3}[a-zA-Z]{2}\d{2,3}')
-# Password strenth evaluation
-
+STANDARD_FORMATS  = re.compile(r'\d{2}[\.-]\d{2}[\.-]\d{2,4}|\d{4}-\d{2}-\d{2}|[a-zA-Z]{1}\d{3}[a-zA-Z]{2}\d{2,3}')
+"""
+Standard formats 
+\d{2}[\.-]\d{2}[\.-]\d{2,4}        - Date format
+\d{4}-\d{2}-\d{2}                  - Date format
+[a-zA-Z]{1}\d{3}[a-zA-Z]{2}\d{2,3} - license plate 
+"""
 def get_password_rating(password):
-    #     pass
     password_rating = 0
-    if not (password in bad_password_list or
-                    pers_inf.findall(password) or
-                    company_name.findall(password) or
-                    standard_formats.findall(password)):
-        if (upper_case.findall(password) and
-            lower_case.findall(password)):
-            password_rating += 3
-        if digits.findall(password):
-            password_rating += 3
-        if spec_symb.findall(password):
-            password_rating += 4
+    if not (re.compile(r'HumanFactorLabs|HFLabs|HFL').findall(password) or
+            STANDARD_FORMATS.findall(password)):
+        if (re.compile(r'[A-Z]').findall(password) and
+            re.compile(r'[a-z]').findall(password)):
+            letter_weight = 3
+            password_rating += letter_weight
+        if re.compile(r'\d').findall(password):
+            digit_weight = 3
+            password_rating += digit_weight
+        if re.compile(r'@|\^|#|\$|\*|&|-|_|\+|=|:|;|!|<|>|~|`|\.|,|%|(|)|"|\\|/|\?').findall(password):
+            spec_symbol_weight = 4
+            password_rating += spec_symbol_weight
     return password_rating
 
 def result_out_put(password_rating):
@@ -42,6 +30,6 @@ def result_out_put(password_rating):
         print('\n\nSuch password can not be approved, try again')
 
 if __name__ == '__main__':
-    password = input('\nPlease, input your password:\n\n')
+    password = getpass.getpass()
     password_rating = get_password_rating(password)
     result_out_put(password_rating)
