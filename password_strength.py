@@ -1,18 +1,18 @@
 import re, getpass
 
-date_format_ru     = r'\d{2}[\.-]\d{2}[\.-]\d{2,4}'                    # Russian date format
-date_format_en     = r'\d{4}-\d{2}-\d{2}'                              # English date format
-license_plate      = r'[a-zA-Z]{1}\d{3}[a-zA-Z]{2}\d{2,3}'             # license format
+date_format_ru = r'\d{2}[\.-]\d{2}[\.-]\d{2,4}'           # Russian date format
+date_format_en = r'\d{4}-\d{2}-\d{2}'                     # English date format
+license_plate  = r'[a-zA-Z]{1}\d{3}[a-zA-Z]{2}\d{2,3}'    # license format
 
 def get_password_rating(password):
     password_rating = 0
     standard_formats = re.compile('{}|{}|{}'.format(date_format_ru, date_format_en, license_plate)) 
-    if not standard_formats.findall(password):                         # Standard form serachs
-        if (re.compile(r'[A-Z]').findall(password) and                 # Upper case search
-            re.compile(r'[a-z]').findall(password)):                   # Lower case search
+    if not standard_formats.findall(password):            # Standard form serachs
+        if (re.compile(r'[A-Z]').findall(password) and    # Upper case search
+            re.compile(r'[a-z]').findall(password)):      # Lower case search
             letter_weight = 3
             password_rating += letter_weight
-        if re.compile(r'\d').findall(password):                        # Digit search
+        if re.compile(r'\d').findall(password):           # Digit search
             digit_weight = 3
             password_rating += digit_weight
         if re.compile(r'@|\^|#|\$|\*|&|-|_|\+|=|:|;|!|<|>|~|`|\.|,|%|(|)|"|\\|/|\?').findall(password): # Special symbols search
